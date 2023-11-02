@@ -1,3 +1,19 @@
+/* Eanilsen - QMK Planck setup */
+/* Copyright (C) 2023 Even A. Nilsen */
+
+/* This program is free software: you can redistribute it and/or modify */
+/* it under the terms of the GNU General Public License as published by */
+/* the Free Software Foundation, either version 3 of the License, or */
+/* (at your option) any later version. */
+
+/* This program is distributed in the hope that it will be useful, */
+/* but WITHOUT ANY WARRANTY; without even the implied warranty of */
+/* MERCHANTABILITY or FITNESS FOR A PARTICULAR PURPOSE.  See the */
+/* GNU General Public License for more details. */
+
+/* You should have received a copy of the GNU General Public License */
+/* along with this program.  If not, see <http://www.gnu.org/licenses/>. */
+
 #include QMK_KEYBOARD_H
 #include "features/customkeys.h"
 #include "features/swapper.h"
@@ -17,7 +33,6 @@
 #define LT_UP LT(0,KC_UP)
 #define LT_LEFT LT(0,KC_LEFT)
 #define SWAPPWIN_TAB LT(0,KC_TAB)
-#define BIG_F LT(0,CT_F)
 /* Home row mods */
 #define HOME_S LGUI_T(KC_S)
 #define HOME_R LALT_T(KC_R)
@@ -55,7 +70,7 @@ const uint16_t PROGMEM keymaps[][MATRIX_ROWS][MATRIX_COLS] = {
     KC_TAB,   KC_Y,    KC_C,    KC_L,    KC_M,    KC_K,     KC_Z,     KC_F,     KC_U,    KC_COMM, KC_QUOT, KC_DEL,
     MOD_ESC,  KC_I,    HOME_S,  HOME_R,  HOME_T,  HOME_G,   HOME_P,   HOME_N,   HOME_E,  HOME_A,  KC_O,    KC_ENT,
     KC_LSFT,  KC_Q,    KC_V,    KC_W,    KC_D,    KC_J,     KC_B,     KC_H,     KC_SLSH, KC_DOT,  KC_X,    KC_RSFT,
-    CAPSWRD,  KC_LCTL, KC_LALT, KC_LGUI, MOD_SPC, SYMBOL,   FUNCTION, BSP_DWRD, NAV,     KC_LGUI, KC_LEFT, KC_RGHT
+    CW_TOGG,  KC_LCTL, KC_LALT, KC_LGUI, MOD_SPC, SYMBOL,   FUNCTION, BSP_DWRD, NAV,     KC_LGUI, KC_LEFT, KC_RGHT
     ),
 
   [_SYMBOL] = LAYOUT_ortho_4x12(
@@ -149,13 +164,6 @@ bool process_record_user(uint16_t keycode, keyrecord_t *record)
   if (!process_select_word(keycode, record, SEL_WRD, is_mac_the_default())) { return false; }
 
   switch (keycode) {
-  case BIG_F:
-    if (record->tap.count && isPressed) {
-      tap_code16(KC_F);
-    } else if (isHeld) {
-      tap_code16(S(KC_F));
-    }
-    return false;
   case LT_LEFT:
     // Guard close returning true if the key is tapped,
     // meaning the rest of the code will only run when the
