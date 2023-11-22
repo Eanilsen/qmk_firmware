@@ -94,7 +94,7 @@ const uint16_t PROGMEM keymaps[][MATRIX_ROWS][MATRIX_COLS] = {
     [_NAV] = LAYOUT(
          KC_WH_U, KC_BTN4, KC_MS_U, KC_BTN5, KC_NO,    KC_MUTE, KC_VOLD, LT_UP,   KC_VOLU, CLS_WIN,
          KC_WH_D, KC_MS_L, KC_MS_D, KC_MS_R, KC_NO,    KC_NO,   LT_LEFT, KC_DOWN, KC_RGHT, KC_ENT,
-         SW_APP,  SW_WIN,  CT_SAVE,   KC_NO,   KC_NO,    KC_NO,   KC_HOME, CT_SAVE,   KC_END,  KC_PSCR,
+         SW_APP,  SW_WIN,  KC_NO,   KC_NO,   KC_NO,    KC_NO,   KC_HOME, KC_NO,   KC_END,  KC_PSCR,
                                     KC_BTN1, BASE,     KC_BTN3, KC_BTN2
     )
 };
@@ -145,27 +145,6 @@ bool process_record_user(uint16_t keycode, keyrecord_t *record)
   if (!process_custom_shift_keys(keycode, record)) { return false; }
 
   switch (keycode) {
-  case CT_SAVE:
-    if (isPressed) {
-      SEND_STRING(SS_TAP(X_BTN2)
-                  SS_DELAY(100)
-                  SS_TAP(X_UP)
-                  SS_DELAY(10)
-                  SS_TAP(X_UP)
-                  SS_DELAY(10)
-                  SS_TAP(X_UP)
-                  SS_DELAY(10)
-                  SS_TAP(X_UP)
-                  SS_DELAY(10)
-                  SS_TAP(X_UP)
-                  SS_DELAY(10)
-                  SS_TAP(X_UP)
-                  SS_DELAY(10)
-                  SS_TAP(X_ENT)
-                  SS_DELAY(600)
-                  SS_TAP(X_ENT));
-    }
-    return false;
   case CLS_WIN:
     send_mac_or_win(G(KC_W), C(KC_W), isPressed);
     return false;

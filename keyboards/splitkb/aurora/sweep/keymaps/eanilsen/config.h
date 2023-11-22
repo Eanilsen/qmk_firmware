@@ -28,3 +28,6 @@
 #define TAPPING_TERM 160
 #define TAPPING_TERM_PER_KEY
 #define PERMISSIVE_HOLD
+
+// Caps word settings
+#define CAPS_WORD_INVERT_ON_SHIFT

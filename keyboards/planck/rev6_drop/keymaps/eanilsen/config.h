@@ -58,3 +58,6 @@
 
 // Disable audio
 #define NO_MUSIC_MODE
+
+// Caps word settings
+#define CAPS_WORD_INVERT_ON_SHIFT
