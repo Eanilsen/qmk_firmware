@@ -34,16 +34,26 @@
 #define LT_LEFT LT(0,KC_LEFT)
 #define SWAPPWIN_TAB LT(0,KC_TAB)
 /* Home row mods */
+#define HOME_I LSFT_T(KC_I)
 #define HOME_S LGUI_T(KC_S)
 #define HOME_R LALT_T(KC_R)
 #define HOME_T LCTL_T(KC_T)
 #define HOME_N RCTL_T(KC_N)
 #define HOME_E RALT_T(KC_E)
 #define HOME_A RGUI_T(KC_A)
+#define HOME_O RSFT_T(KC_O)
 #define HOME_P LT(_NUM,KC_P)
 #define HOME_G LT(_NAV,KC_G)
 #define N_TAB LCTL(KC_TAB)
 #define P_TAB LSFT(LCTL(KC_TAB))
+#define O_LSFT OSM(MOD_LSFT)
+#define O_LCTL OSM(MOD_LCTL)
+#define O_LGUI OSM(MOD_LGUI)
+#define O_LALT OSM(MOD_LALT)
+#define O_RSFT OSM(MOD_RSFT)
+#define O_RCTL OSM(MOD_RCTL)
+#define O_RGUI OSM(MOD_RGUI)
+#define O_RALT OSM(MOD_RALT)
 
 enum planck_layers {
   _ISRT,
@@ -67,30 +77,30 @@ const uint16_t PROGMEM keymaps[][MATRIX_ROWS][MATRIX_COLS] = {
 
   [_ISRT] = LAYOUT_ortho_4x12(
     KC_TAB,  KC_Y,    KC_C,    KC_L,    KC_M,    KC_K,   KC_Z,     KC_F,     KC_U,    KC_COMM, KC_QUOT, KC_DEL,
-    MOD_ESC, KC_I,    HOME_S,  HOME_R,  HOME_T,  HOME_G, HOME_P,   HOME_N,   HOME_E,  HOME_A,  KC_O,    KC_ENT,
-    KC_LSFT, KC_Q,    KC_V,    KC_W,    KC_D,    KC_J,   KC_B,     KC_H,     KC_SLSH, KC_DOT,  KC_X,    KC_RSFT,
-    CW_TOGG, KC_LCTL, KC_LALT, KC_LGUI, MOD_SPC, SYMBOL, FUNCTION, BSP_DWRD, NAV,     KC_LGUI, KC_LEFT, KC_RGHT
+    MOD_ESC, HOME_I,  HOME_S,  HOME_R,  HOME_T,  HOME_G, HOME_P,   HOME_N,   HOME_E,  HOME_A,  HOME_O,  KC_ENT,
+    O_LSFT,  KC_Q,    KC_V,    KC_W,    KC_D,    KC_J,   KC_B,     KC_H,     KC_SLSH, KC_DOT,  KC_X,    O_RSFT,
+    CW_TOGG, O_LCTL,  O_LALT,  O_LGUI,  MOD_SPC, SYMBOL, FUNCTION, BSP_DWRD, NAV,     O_LGUI,  KC_LEFT, KC_RGHT
     ),
 
   [_SYMBOL] = LAYOUT_ortho_4x12(
     KC_NO,   KC_EXLM, KC_LT,   KC_GT,   KC_PLUS, KC_NO, KC_NO, KC_UNDS, KC_PIPE, KC_TILD, KC_PERC, KC_DEL,
     KC_ESC,  KC_LCBR, KC_RCBR, KC_LPRN, KC_RPRN, KC_AT, ARROW, KC_AMPR, KC_ASTR, KC_DQUO, KC_DLR,  KC_ENT,
-    KC_LSFT, KC_COLN, KC_SCLN, KC_LBRC, KC_RBRC, KC_NO, KC_NO, KC_MINS, KC_HASH, GRAVE,   KC_CIRC, KC_RSFT,
-    QWRT,    KC_LCTL, KC_LALT, KC_LGUI, MOD_SPC, KC_NO, HOME,  NUM,     KC_NO,   KC_NO,   KC_NO,   KC_NO
+    O_LSFT,  KC_COLN, KC_SCLN, KC_LBRC, KC_RBRC, KC_NO, KC_NO, KC_MINS, KC_HASH, GRAVE,   KC_CIRC, O_RSFT,
+    QWRT,    O_LCTL,  O_LALT,  O_LGUI,  MOD_SPC, KC_NO, HOME,  NUM,     KC_NO,   KC_NO,   KC_NO,   KC_NO
     ),
 
   [_NUM] = LAYOUT_ortho_4x12(
     KC_NO,  KC_SLSH, KC_1,    KC_2,    KC_3,    KC_PLUS, KC_NO, KC_NO,   KC_NO, KC_COMM, KC_NO, KC_DEL,
     KC_ESC, KC_0,    KC_4,    KC_5,    KC_6,    KC_MINS, KC_NO, KC_NO,   KC_NO, KC_NO,   KC_NO, KC_ENT,
-    KC_NO,  KC_ASTR, KC_7,    KC_8,    KC_9,    KC_EQL,  KC_NO, KC_NO,   KC_NO, KC_DOT,  KC_NO, KC_RSFT,
-    QWRT,   KC_LCTL, KC_LALT, KC_LGUI, MOD_SPC, HOME,    KC_NO, KC_BSPC, KC_NO, KC_NO,   KC_NO, KC_NO
+    KC_NO,  KC_ASTR, KC_7,    KC_8,    KC_9,    KC_EQL,  KC_NO, KC_NO,   KC_NO, KC_DOT,   KC_NO, O_RSFT,
+    QWRT,   O_LCTL,  O_LALT,  O_LGUI,  MOD_SPC, HOME,    KC_NO, KC_BSPC, KC_NO, KC_NO,    KC_NO, KC_NO
     ),
 
   [_FUNCTION] = LAYOUT_ortho_4x12(
-    CG_TOGG,   KC_NO,   KC_F1,   KC_F2,   KC_F3,  KC_F4,  KC_NO,   KC_NO,   KC_NO,    KC_NO, KC_NO, QK_BOOT,
-    KC_NO,     KC_NO,   KC_F5,   KC_F6,   KC_F7,  KC_F8,  KC_NO,   CT_AE,   CT_OE,    CT_AA, KC_NO, KC_NO,
-    KC_LSFT,   KC_NO,   KC_F9,   KC_F10,  KC_F11, KC_F12, KC_NO,   SEL_WRD, SEL_SRCH, KC_NO, KC_NO, KC_RSFT,
-    KC_NO,     KC_LCTL, KC_LALT, KC_LGUI, MOD_SPC, HOME,  KC_TRNS, KC_RCTL, KC_NO,    KC_NO, KC_NO, KC_NO
+    CG_TOGG, KC_NO,   KC_F1,   KC_F2,   KC_F3,   KC_F4,  KC_NO,   KC_NO,   KC_NO,    KC_NO, KC_NO, QK_BOOT,
+    KC_NO,   KC_NO,   KC_F5,   KC_F6,   KC_F7,   KC_F8,  KC_NO,   CT_AE,   CT_OE,    CT_AA, KC_NO, KC_NO,
+    O_LSFT,  KC_NO,   KC_F9,   KC_F10,  KC_F11,  KC_F12, KC_NO,   SEL_WRD, SEL_SRCH, KC_NO, KC_NO, O_RSFT,
+    KC_NO,   O_LCTL,  O_LALT,  O_LGUI,  MOD_SPC, HOME,   KC_TRNS, O_RCTL,  KC_NO,    KC_NO, KC_NO, KC_NO
     ),
 
   [_NAV] = LAYOUT_ortho_4x12(
@@ -101,10 +111,10 @@ const uint16_t PROGMEM keymaps[][MATRIX_ROWS][MATRIX_COLS] = {
     ),
 
   [_QWERTY] = LAYOUT_ortho_4x12(
-    KC_TAB,  KC_Q,    KC_W,    KC_E,    KC_R,    KC_T,    KC_Y,    KC_U,    KC_I,    KC_O,    KC_P,    KC_DEL,
-    KC_ESC,  KC_A,    KC_S,    KC_D,    KC_F,    KC_G,    KC_H,    KC_J,    KC_K,    KC_L,    KC_SCLN, KC_ENT,
-    KC_LSFT, KC_Z,    KC_X,    KC_C,    KC_V,    KC_B,    KC_N,    KC_M,    KC_COMM, KC_DOT,  KC_SLSH, KC_RSFT,
-    KC_D,    KC_LCTL, KC_LALT, KC_LGUI, KC_SPC,  HOME,    NUM,     KC_BSPC, KC_LEFT, KC_DOWN, KC_UP,   KC_RGHT
+    KC_TAB, KC_Q,    KC_W,    KC_E,    KC_R,    KC_T,    KC_Y,    KC_U,    KC_I,    KC_O,    KC_P,    KC_DEL,
+    KC_ESC, KC_A,    KC_S,    KC_D,    KC_F,    KC_G,    KC_H,    KC_J,    KC_K,    KC_L,    KC_SCLN, KC_ENT,
+    O_LSFT, KC_Z,    KC_X,    KC_C,    KC_V,    KC_B,    KC_N,    KC_M,    KC_COMM, KC_DOT,  KC_SLSH, O_RSFT,
+    KC_D,   O_LCTL,  O_LALT,  O_LGUI,  KC_SPC,  HOME,    NUM,     KC_BSPC, KC_LEFT, KC_DOWN, KC_UP,   KC_RGHT
     )
 };
 
