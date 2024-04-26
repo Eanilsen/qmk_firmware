@@ -14,6 +14,9 @@
  * along with this program.  If not, see <http://www.gnu.org/licenses/>.
  */
 
+// <async-shell-command "qmk compile -kb splitkb/aurora/sweep -km eanilsen">
+// <async-shell-command "qmk flash -kb splitkb/aurora/sweep -km eanilsen">
+
 #include QMK_KEYBOARD_H
 #include "features/customkeys.h"
 #include "features/swapper.h"
@@ -29,6 +32,8 @@
 #define MOD_BSP LT(0,KC_BSPC)
 #define LT_UP LT(0,KC_UP)
 #define LT_LEFT LT(0,KC_LEFT)
+#define LT_BRUP LT(0,KC_PAUS)
+#define LT_BRDN LT(0,KC_SCRL)
 /* Home row mods */
 #define HOME_I LSFT_T(KC_I)
 #define HOME_S LGUI_T(KC_S)
@@ -93,8 +98,8 @@ const uint16_t PROGMEM keymaps[][MATRIX_ROWS][MATRIX_COLS] = {
 
     [_NAV] = LAYOUT(
          KC_WH_U, KC_BTN4, KC_MS_U, KC_BTN5, KC_NO,    KC_MUTE, KC_VOLD, LT_UP,   KC_VOLU, CLS_WIN,
-         KC_WH_D, KC_MS_L, KC_MS_D, KC_MS_R, KC_NO,    KC_NO,   LT_LEFT, KC_DOWN, KC_RGHT, KC_ENT,
-         SW_APP,  SW_WIN,  KC_NO,   KC_NO,   KC_NO,    KC_NO,   KC_HOME, KC_NO,   KC_END,  KC_PSCR,
+         KC_WH_D, KC_MS_L, KC_MS_D, KC_MS_R, KC_NO,    LT_BRUP, LT_LEFT, KC_DOWN, KC_RGHT, KC_ENT,
+         SW_APP,  SW_WIN,  KC_NO,   KC_NO,   KC_NO,    LT_BRDN, KC_HOME, KC_NO,   KC_END,  KC_PSCR,
                                     KC_BTN1, BASE,     KC_BTN3, KC_BTN2
     )
 };
@@ -145,6 +150,12 @@ bool process_record_user(uint16_t keycode, keyrecord_t *record)
   if (!process_custom_shift_keys(keycode, record)) { return false; }
 
   switch (keycode) {
+  case LT_BRDN:
+    send_mac_or_win(KC_SCRL, KC_BRID, isPressed);
+    return false;
+  case LT_BRUP:
+    send_mac_or_win(KC_PAUS, KC_BRIU, isPressed);
+    return false;
   case CLS_WIN:
     send_mac_or_win(G(KC_W), C(KC_W), isPressed);
     return false;
