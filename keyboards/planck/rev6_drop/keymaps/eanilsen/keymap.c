@@ -35,6 +35,8 @@
 #define BSP_DWRD LT(0,KC_BSPC)
 #define LT_UP LT(0,KC_UP)
 #define LT_LEFT LT(0,KC_LEFT)
+#define LT_BRUP LT(0,KC_PAUS)
+#define LT_BRDN LT(0,KC_SCRL)
 #define SWAPPWIN_TAB LT(0,KC_TAB)
 /* Home row mods */
 #define HOME_I LSFT_T(KC_I)
@@ -109,8 +111,8 @@ const uint16_t PROGMEM keymaps[][MATRIX_ROWS][MATRIX_COLS] = {
   [_NAV] = LAYOUT_ortho_4x12(
     CLS_WIN, KC_WH_U, P_TAB,   KC_MS_U, N_TAB,   KC_H,  KC_MUTE, KC_VOLD, LT_UP,   KC_VOLU, CLS_WIN, KC_D,
     KC_ESC,  KC_WH_D, KC_MS_L, KC_MS_D, KC_MS_R, KC_G,  KC_BTN4, LT_LEFT, KC_DOWN, KC_RGHT, KC_BTN5, KC_ENT,
-    KC_ENT,  SW_APP,  KC_S,    KC_D,    KC_F,    KC_F5, KC_BRIU, KC_HOME, KC_NO,   KC_END,  KC_PSCR, SW_APP,
-    KC_D,    KC_COMM, KC_DOT,  KC_BTN3, KC_BTN1, HOME,  KC_BRID, KC_BTN2, KC_NO,   KC_NO,   KC_NO,   KC_F5
+    KC_ENT,  SW_APP,  KC_S,    KC_D,    KC_F,    KC_F5, LT_BRUP, KC_HOME, KC_NO,   KC_END,  KC_PSCR, SW_APP,
+    KC_D,    KC_COMM, KC_DOT,  KC_BTN3, KC_BTN1, HOME,  LT_BRDN, KC_BTN2, KC_NO,   KC_NO,   KC_NO,   KC_F5
     ),
 
   [_QWERTY] = LAYOUT_ortho_4x12(
@@ -176,6 +178,12 @@ bool process_record_user(uint16_t keycode, keyrecord_t *record)
   if (!process_select_word(keycode, record, SEL_WRD, is_mac_the_default())) { return false; }
 
   switch (keycode) {
+  case LT_BRUP:
+    send_mac_or_win(KC_PAUS, KC_BRIU, isPressed);
+    return false;
+  case LT_BRDN:
+    send_mac_or_win(KC_SCRL, KC_BRID, isPressed);
+    return false;
   case LT_LEFT:
     // Guard close returning true if the key is tapped,
     // meaning the rest of the code will only run when the
